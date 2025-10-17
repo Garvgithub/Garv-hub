@@ -1,62 +1,31 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import path from 'path' // <-- REQUIRED: Import 'path' to use path.resolve
+// vite.config.ts - Minimal, Clean, and Corrected for Vercel/Vite/TS
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import path from 'path'; // Correct import for 'path'
 
-// Correctly structure the configuration object
 export default defineConfig({
   plugins: [react()],
   
   resolve: {
+    // Keep standard extensions
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    
     alias: {
-      // NOTE: The version aliases (e.g., 'vaul@1.1.2') are unusual and often unnecessary. 
-      // I've kept them as you provided, but merged the 'path' alias.
-      'vaul@1.1.2': 'vaul',
-      'sonner@2.0.3': 'sonner',
-      'recharts@2.15.2': 'recharts',
-      'react-resizable-panels@2.1.7': 'react-resizable-panels',
-      'react-hook-form@7.55.0': 'react-hook-form',
-      'react-day-picker@8.10.1': 'react-day-picker',
-      'next-themes@0.4.6': 'next-themes',
-      'lucide-react@0.487.0': 'lucide-react',
-      'input-otp@1.4.2': 'input-otp',
-      'embla-carousel-react@8.6.0': 'embla-carousel-react',
-      'cmdk@1.1.1': 'cmdk',
-      'class-variance-authority@0.7.1': 'class-variance-authority',
-      '@radix-ui/react-tooltip@1.1.8': '@radix-ui/react-tooltip',
-      '@radix-ui/react-toggle@1.1.2': '@radix-ui/react-toggle',
-      '@radix-ui/react-toggle-group@1.1.2': '@radix-ui/react-toggle-group',
-      '@radix-ui/react-tabs@1.1.3': '@radix-ui/react-tabs',
-      '@radix-ui/react-switch@1.1.3': '@radix-ui/react-switch',
-      '@radix-ui/react-slot@1.1.2': '@radix-ui/react-slot',
-      '@radix-ui/react-slider@1.2.3': '@radix-ui/react-slider',
-      '@radix-ui/react-separator@1.1.2': '@radix-ui/react-separator',
-      '@radix-ui/react-select@2.1.6': '@radix-ui/react-select',
-      '@radix-ui/react-scroll-area@1.2.3': '@radix-ui/react-scroll-area',
-      '@radix-ui/react-radio-group@1.2.3': '@radix-ui/react-radio-group',
-      '@radix-ui/react-progress@1.1.2': '@radix-ui/react-progress',
-      '@radix-ui/react-popover@1.1.6': '@radix-ui/react-popover',
-      '@radix-ui/react-navigation-menu@1.2.5': '@radix-ui/react-navigation-menu',
-      '@radix-ui/react-menubar@1.1.6': '@radix-ui/react-menubar',
-      '@radix-ui/react-label@2.1.2': '@radix-ui/react-label',
-      '@radix-ui/react-hover-card@1.1.6': '@radix-ui/react-hover-card',
-      '@radix-ui/react-dropdown-menu@2.1.6': '@radix-ui/react-dropdown-menu',
-      '@radix-ui/react-dialog@1.1.6': '@radix-ui/react-dialog',
-      '@radix-ui/react-context-menu@2.2.6': '@radix-ui/react-context-menu',
-      '@radix-ui/react-collapsible@1.1.3': '@radix-ui/react-collapsible',
-      '@radix-ui/react-checkbox@1.1.4': '@radix-ui/react-checkbox',
-      '@radix-ui/react-avatar@1.1.3': '@radix-ui/react-avatar',
-      '@radix-ui/react-aspect-ratio@1.1.2': '@radix-ui/react-aspect-ratio',
-      '@radix-ui/react-alert-dialog@1.1.6': '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
-      // The path alias must use path.resolve
-      '@': path.resolve(__dirname, './src'), 
+      // Keep only the necessary @ alias for './src'
+      '@': path.resolve(__dirname, './src'),
+      
+      // NOTE: I am removing the 30+ version-specific aliases (e.g., 'vaul@1.1.2': 'vaul'). 
+      // These are usually redundant and sometimes cause path confusion in CI/CD environments.
+      // Your dependencies are already installed correctly by npm, so these aliases are not required 
+      // for the build to find the packages.
     },
   },
   
   build: {
     target: 'esnext',
-    outDir: 'dist', // Changing 'build' to 'dist' to match Vercel/Vite standard output
+    // CHANGE: Setting the output back to 'dist' (Vercel/Vite default)
+    // Your error log was from a previous attempt showing 'build', but 'dist' is safer.
+    outDir: 'dist', 
   },
   
   server: {
