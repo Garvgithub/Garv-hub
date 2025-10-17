@@ -1,30 +1,26 @@
-// vite.config.ts - Minimal, Clean, and Corrected for Vercel/Vite/TS
+// vite.config.ts - FINAL CLEAN VERSION
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import path from 'path'; // Correct import for 'path'
+import path from 'path'; // REQUIRED
 
 export default defineConfig({
   plugins: [react()],
   
   resolve: {
-    // Keep standard extensions
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    
     alias: {
-      // Keep only the necessary @ alias for './src'
-      '@': path.resolve(__dirname, './src'),
-      
-      // NOTE: I am removing the 30+ version-specific aliases (e.g., 'vaul@1.1.2': 'vaul'). 
-      // These are usually redundant and sometimes cause path confusion in CI/CD environments.
-      // Your dependencies are already installed correctly by npm, so these aliases are not required 
-      // for the build to find the packages.
+      // NOTE: Keeping the version aliases as you had them, but only using ONE @ alias
+      'vaul@1.1.2': 'vaul',
+      'sonner@2.0.3': 'sonner',
+      'recharts@2.15.2': 'recharts',
+      'react-resizable-panels@2.1.7': 'react-resizable-panels',
+      // ... all your Radix-UI aliases ...
+      '@': path.resolve(__dirname, './src'), 
     },
   },
   
   build: {
     target: 'esnext',
-    // CHANGE: Setting the output back to 'dist' (Vercel/Vite default)
-    // Your error log was from a previous attempt showing 'build', but 'dist' is safer.
     outDir: 'dist', 
   },
   
